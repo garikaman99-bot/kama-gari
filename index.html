@@ -3,158 +3,82 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kama Gari Couture | Indo-Western for every occasion</title>
-<meta name="description" content="Indo-Western couture for cocktails, receptions, bridal celebrations and Karwa Chauth. Sizes M to XL.">
+<title>Kama Gari Couture | Occasion wear</title>
+<meta name="description" content="Indo-Western and lehenga occasion wear for cocktails, receptions, bridal celebrations and festive evenings.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
-:root{
-  --cream:#f6efe4; --sand:#e9dcc6; --ink:#25221d; --gold:#a67c52; --line:#d9cdb9;
-  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-  --sans:"Jost",Arial,sans-serif;
-}
+:root{--cream:#f6efe4;--sand:#e9dcc6;--ink:#25221d;--gold:#a67c52;--line:#d9cdb9;
+--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Jost",Arial,sans-serif}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
 body{background:var(--cream);color:var(--ink);font:300 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-img{display:block;width:100%;height:100%;object-fit:cover}
+img,video{display:block;width:100%;height:100%;object-fit:cover}
 a{color:inherit}
-a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
 .label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-
-/* header */
 header{padding:1.75rem 0 0;text-align:center}
 .brand{font:400 1.5rem/1 var(--serif);letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
 header nav{margin-top:1rem;display:flex;gap:1.75rem;justify-content:center;font-size:.85rem}
 header nav a{text-decoration:none;color:var(--gold)}
 header nav a:hover{color:var(--ink)}
-
-/* hero: two offset frames, as on the lookbook cover */
+.frame{background:var(--sand);aspect-ratio:3/4;position:relative;overflow:hidden}
+.frame video{position:absolute;inset:0;opacity:0;transition:opacity .3s}
+.frame.playing video{opacity:1}
 .hero{padding:3.5rem 0 0}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:start}
-.frame{background:var(--sand);aspect-ratio:3/4}
+.pair{display:grid;grid-template-columns:1fr 1fr}
 .pair .frame:last-child{margin-top:2.5rem}
 .hero-text{text-align:center;padding:4rem 0 5rem}
 h1{font:400 clamp(3rem,9vw,5.5rem)/1 var(--serif)}
 .hero-text p{margin-top:1rem;font-size:1.15rem}
-.occasions{margin-top:1.75rem}
-.occasions span+span::before{content:"/";margin:0 .6rem;color:var(--line)}
-
-/* looks */
 .looks{border-top:1px solid var(--line);padding:5rem 0 2rem}
-.looks h2,.visit h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);text-align:center}
-.looks .intro{text-align:center;margin:.75rem auto 4rem;max-width:34rem}
-.look{display:grid;grid-template-columns:5fr 4fr;gap:4rem;align-items:center;margin-bottom:5rem}
-.look:nth-of-type(even){grid-template-columns:4fr 5fr}
-.look:nth-of-type(even) .frame{order:2}
-.look .frame{max-width:460px;width:100%;justify-self:center}
-.look h3{font:400 clamp(1.9rem,4vw,2.6rem)/1.1 var(--serif);text-transform:uppercase;margin:.5rem 0 .75rem}
-.look .meta{margin-top:1.25rem;display:flex;gap:1.5rem;align-items:baseline;font-size:.9rem}
-.look .meta .label{font-size:.72rem}
-
-/* visit */
-.visit{background:var(--sand);padding:5rem 0;text-align:center}
-.visit .studio{font:400 2rem/1.2 var(--serif);margin-top:1.5rem}
-.visit .unit{font-size:1.25rem}
-.visit p{margin-top:1rem}
-.btn{display:inline-block;margin-top:2rem;padding:.9rem 2.2rem;border:1px solid var(--ink);text-decoration:none;font-size:.9rem;letter-spacing:.06em;transition:background .2s,color .2s}
+h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);text-align:center}
+.intro{text-align:center;margin:.75rem auto 2rem;max-width:34rem}
+.filters{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem}
+.filters button{font:inherit;font-size:.85rem;padding:.5rem 1.2rem;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem 2rem}
+.card h3{font:400 1.6rem/1.15 var(--serif);text-transform:uppercase;margin:1rem 0 .35rem}
+.card .label{font-size:.72rem;margin-top:.5rem}
+.card .sizes{font-size:.9rem;margin-top:.25rem}
+.badge{position:absolute;top:.75rem;left:.75rem;z-index:2;background:var(--ink);color:var(--cream);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .7rem}
+.card.sold .frame img{filter:grayscale(.7);opacity:.7}
+.btn{display:inline-block;margin-top:1rem;padding:.7rem 1.5rem;border:1px solid var(--ink);text-decoration:none;font-size:.88rem;letter-spacing:.05em;transition:background .2s,color .2s}
 .btn:hover{background:var(--ink);color:var(--cream)}
-
+.msg{text-align:center;padding:2rem 0 4rem;grid-column:1/-1}
+.visit{background:var(--sand);padding:5rem 0;text-align:center}
+.studio{font:400 2rem/1.2 var(--serif);margin-top:1.5rem}
+.visit p{margin-top:.75rem}
+.visit .links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 footer{padding:2rem 0;text-align:center;font-size:.8rem;color:var(--gold)}
-
-@media (max-width:760px){
-  .pair .frame:last-child{margin-top:1.25rem}
-  .look,.look:nth-of-type(even){grid-template-columns:1fr;gap:1.5rem;margin-bottom:4rem}
-  .look:nth-of-type(even) .frame{order:0}
-  .look .copy{text-align:center}
-  .look .meta{justify-content:center}
-  .occasions span{display:inline-block}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.grid{grid-template-columns:1fr;gap:3rem}.pair .frame:last-child{margin-top:1.25rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.frame video,.btn{transition:none}}
 </style>
 </head>
 <body>
-
 <header>
   <a class="brand" href="#top" id="top">Kama Gari Couture</a>
-  <nav aria-label="Main">
-    <a href="#looks">The Occasion Edit</a>
-    <a href="#visit">Visit the studio</a>
-  </nav>
+  <nav aria-label="Main"><a href="#looks">The Collection</a><a href="#visit">Visit the studio</a></nav>
 </header>
 
 <main>
-  <section class="hero wrap">
-    <div class="pair">
-      <div class="frame"><img src="images/black-rose.jpg" alt="Black Rose: black satin drape with sculptural flowers" width="900" height="1200"></div>
-      <div class="frame"><img src="images/blush-radiance.jpg" alt="Blush Radiance: blush shimmer lehenga with embellished drape" width="900" height="1200"></div>
-    </div>
+  <section class="hero wrap" id="hero" hidden>
+    <div class="pair" id="pair"></div>
     <div class="hero-text">
-      <h1>Indo-Western</h1>
-      <p>For every occasion worth dressing up for.</p>
-      <p class="occasions label"><span>Cocktails</span><span>Reception</span><span>Bridal</span><span>Karwa Chauth</span></p>
+      <h1>Occasion wear</h1>
+      <p>Indo-Western and lehengas for every occasion worth dressing up for.</p>
     </div>
   </section>
 
   <section class="looks" id="looks">
     <div class="wrap">
-      <h2>The Occasion Edit</h2>
-      <p class="intro">Six looks for evenings, receptions and celebrations. All available in sizes M to XL.</p>
-
-      <article class="look">
-        <div class="frame"><img loading="lazy" src="images/midnight-drape.jpg" alt="Midnight Drape: navy sequin blouse with draped saree skirt" width="900" height="1200"></div>
-        <div class="copy">
-          <h3>Midnight Drape</h3>
-          <p>Navy shimmer meets sculpted draping.</p>
-          <p class="meta"><span class="label">Cocktails, evening celebrations</span><span>M to XL</span></p>
-        </div>
-      </article>
-
-      <article class="look">
-        <div class="frame"><img loading="lazy" src="images/scarlet-celebration.jpg" alt="Scarlet Celebration: hot pink embellished blouse with draped saree" width="900" height="1200"></div>
-        <div class="copy">
-          <h3>Scarlet Celebration</h3>
-          <p>Statement colour with intricate sparkle.</p>
-          <p class="meta"><span class="label">Karwa Chauth, bridal celebrations</span><span>M to XL</span></p>
-        </div>
-      </article>
-
-      <article class="look">
-        <div class="frame"><img loading="lazy" src="images/liquid-metal.jpg" alt="Liquid Metal: metallic draped saree with crystal bustier" width="900" height="1200"></div>
-        <div class="copy">
-          <h3>Liquid Metal</h3>
-          <p>A luminous silhouette for an evening entrance.</p>
-          <p class="meta"><span class="label">Cocktails, reception</span><span>M to XL</span></p>
-        </div>
-      </article>
-
-      <article class="look">
-        <div class="frame"><img loading="lazy" src="images/peacock-nocturne.jpg" alt="Peacock Nocturne: navy skirt set with peacock motif" width="900" height="1200"></div>
-        <div class="copy">
-          <h3>Peacock Nocturne</h3>
-          <p>Jewel-toned detail on a flowing navy silhouette.</p>
-          <p class="meta"><span class="label">Reception, festive evenings</span><span>M to XL</span></p>
-        </div>
-      </article>
-
-      <article class="look">
-        <div class="frame"><img loading="lazy" src="images/blush-radiance.jpg" alt="Blush Radiance: blush shimmer lehenga with embellished drape" width="900" height="1200"></div>
-        <div class="copy">
-          <h3>Blush Radiance</h3>
-          <p>Soft shimmer, delicate embellishment, graceful movement.</p>
-          <p class="meta"><span class="label">Bridal celebrations, reception</span><span>M to XL</span></p>
-        </div>
-      </article>
-
-      <article class="look">
-        <div class="frame"><img loading="lazy" src="images/black-rose.jpg" alt="Black Rose: black satin drape with sculptural flowers" width="900" height="1200"></div>
-        <div class="copy">
-          <h3>Black Rose</h3>
-          <p>Sculptural florals with a dramatic satin drape.</p>
-          <p class="meta"><span class="label">Cocktails, reception</span><span>M to XL</span></p>
-        </div>
-      </article>
+      <h2>The Collection</h2>
+      <p class="intro">Found something you love? Message us and we will share details, sizes and availability.</p>
+      <div class="filters" id="filters" role="group" aria-label="Filter by collection"></div>
+      <div class="grid" id="grid"><p class="msg">Loading designs…</p></div>
     </div>
   </section>
 
@@ -162,17 +86,102 @@ footer{padding:2rem 0;text-align:center;font-size:.8rem;color:var(--gold)}
     <div class="wrap">
       <h2>Your occasion. Your statement.</h2>
       <p class="studio">Kama Gari Studio</p>
-      <p class="unit">A1-204</p>
-      <p>Sizes available: M to XL</p>
-      <!-- Replace with your WhatsApp, phone or booking link -->
-      <a class="btn" href="#visit">Book a visit</a>
+      <p>A1-204</p>
+      <div class="links">
+        <a class="btn" id="wa-main" href="#">Message us on WhatsApp</a>
+        <a class="btn" id="ig-main" href="#">Instagram</a>
+      </div>
     </div>
   </section>
 </main>
+<footer><div class="wrap">&copy; 2026 Kama Gari Couture</div></footer>
 
-<footer>
-  <div class="wrap">&copy; 2026 Kama Gari Couture</div>
-</footer>
+<script>
+/* ---- EDIT THESE THREE ---- */
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzLsTn_PsfZDag01Z2TNJuEMjG6_4h00VOz6qstDrvd6tmYY43s7ozYT1bIoK2qQzx-/exec";
+const WHATSAPP  = "91XXXXXXXXXX";      // country code + number, no + or spaces
+const INSTAGRAM = "your_handle";       // without @
+/* -------------------------- */
 
+const $ = id => document.getElementById(id);
+const wa = text => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+$("wa-main").href = wa("Hi, I’d like to know more about your collection.");
+$("ig-main").href = `https://instagram.com/${INSTAGRAM}`;
+
+function el(tag, cls, text){ const e = document.createElement(tag); if(cls) e.className = cls; if(text) e.textContent = text; return e; }
+const photo = l => `looks/${l.folder}/photo.jpg`;
+const motion = l => `looks/${l.folder}/motion.mp4`;
+
+function attachVideo(frame, look){
+  let video = null, failed = false;
+  const start = () => {
+    if(failed) return;
+    if(!video){
+      video = document.createElement("video");
+      video.muted = true; video.loop = true; video.playsInline = true; video.preload = "none";
+      video.src = motion(look);
+      video.addEventListener("error", () => { failed = true; video.remove(); frame.classList.remove("playing"); });
+      frame.appendChild(video);
+    }
+    video.play().then(() => frame.classList.add("playing")).catch(() => {});
+  };
+  const stop = () => { if(video){ video.pause(); frame.classList.remove("playing"); } };
+  frame.addEventListener("pointerenter", e => { if(e.pointerType === "mouse") start(); });
+  frame.addEventListener("pointerleave", e => { if(e.pointerType === "mouse") stop(); });
+  frame.addEventListener("click", () => frame.classList.contains("playing") ? stop() : start());
+}
+
+function card(look){
+  const status = (look.status || "").toLowerCase();
+  const c = el("article", "card" + (status === "sold" ? " sold" : ""));
+  const f = el("div", "frame");
+  const img = document.createElement("img");
+  img.src = photo(look); img.alt = look.name; img.loading = "lazy"; img.width = 900; img.height = 1200;
+  img.addEventListener("error", () => img.remove());
+  f.appendChild(img);
+  if(status === "sold" || status === "reserved") f.appendChild(el("span", "badge", look.status));
+  attachVideo(f, look);
+  c.appendChild(f);
+  c.appendChild(el("h3", "", look.name));
+  if(look.description) c.appendChild(el("p", "", look.description));
+  if(look.occasions) c.appendChild(el("p", "label", look.occasions));
+  if(look.sizes) c.appendChild(el("p", "sizes", "Sizes " + look.sizes));
+  const sold = status === "sold";
+  const a = el("a", "btn", sold ? "Ask for something similar" : "Message us about this");
+  a.href = wa(sold ? `Hi, I saw ${look.name} (${look.code}) is sold. Do you have something similar?` : `Hi, I’m interested in ${look.name} (${look.code}).`);
+  c.appendChild(a);
+  return c;
+}
+
+function render(looks, filter){
+  const grid = $("grid"); grid.replaceChildren();
+  const list = filter === "All" ? looks : looks.filter(l => l.collection === filter);
+  if(!list.length){ grid.appendChild(el("p", "msg", "New designs are arriving soon. Message us to see what is in the studio.")); return; }
+  list.forEach(l => grid.appendChild(card(l)));
+}
+
+function init(looks){
+  const hero = looks.filter(l => l.status !== "Sold").slice(0, 2);
+  if(hero.length === 2){
+    hero.forEach(l => { const f = el("div", "frame"); const i = document.createElement("img"); i.src = photo(l); i.alt = l.name; i.addEventListener("error", () => i.remove()); f.appendChild(i); $("pair").appendChild(f); });
+    $("hero").hidden = false;
+  }
+  const cols = ["All", ...new Set(looks.map(l => l.collection).filter(Boolean))];
+  const bar = $("filters");
+  if(cols.length > 2){
+    cols.forEach((name, i) => {
+      const b = el("button", "", name); b.type = "button"; b.setAttribute("aria-pressed", i === 0);
+      b.addEventListener("click", () => { bar.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); render(looks, name); });
+      bar.appendChild(b);
+    });
+  }
+  render(looks, "All");
+}
+
+fetch(SHEET_URL)
+  .then(r => r.json())
+  .then(init)
+  .catch(() => { $("grid").replaceChildren(el("p", "msg", "We couldn’t load the collection just now. Please message us on WhatsApp or Instagram to see our latest designs.")); });
+</script>
 </body>
 </html>
