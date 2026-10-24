@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kama Gari Couture | Indo-Western for every occasion</title>
+<meta name="description" content="Indo-Western couture for cocktails, receptions, bridal celebrations and Karwa Chauth. Sizes M to XL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6efe4; --sand:#e9dcc6; --ink:#25221d; --gold:#a67c52; --line:#d9cdb9;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Jost",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font:300 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+
+/* header */
+header{padding:1.75rem 0 0;text-align:center}
+.brand{font:400 1.5rem/1 var(--serif);letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
+header nav{margin-top:1rem;display:flex;gap:1.75rem;justify-content:center;font-size:.85rem}
+header nav a{text-decoration:none;color:var(--gold)}
+header nav a:hover{color:var(--ink)}
+
+/* hero: two offset frames, as on the lookbook cover */
+.hero{padding:3.5rem 0 0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:start}
+.frame{background:var(--sand);aspect-ratio:3/4}
+.pair .frame:last-child{margin-top:2.5rem}
+.hero-text{text-align:center;padding:4rem 0 5rem}
+h1{font:400 clamp(3rem,9vw,5.5rem)/1 var(--serif)}
+.hero-text p{margin-top:1rem;font-size:1.15rem}
+.occasions{margin-top:1.75rem}
+.occasions span+span::before{content:"/";margin:0 .6rem;color:var(--line)}
+
+/* looks */
+.looks{border-top:1px solid var(--line);padding:5rem 0 2rem}
+.looks h2,.visit h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);text-align:center}
+.looks .intro{text-align:center;margin:.75rem auto 4rem;max-width:34rem}
+.look{display:grid;grid-template-columns:5fr 4fr;gap:4rem;align-items:center;margin-bottom:5rem}
+.look:nth-of-type(even){grid-template-columns:4fr 5fr}
+.look:nth-of-type(even) .frame{order:2}
+.look .frame{max-width:460px;width:100%;justify-self:center}
+.look h3{font:400 clamp(1.9rem,4vw,2.6rem)/1.1 var(--serif);text-transform:uppercase;margin:.5rem 0 .75rem}
+.look .meta{margin-top:1.25rem;display:flex;gap:1.5rem;align-items:baseline;font-size:.9rem}
+.look .meta .label{font-size:.72rem}
+
+/* visit */
+.visit{background:var(--sand);padding:5rem 0;text-align:center}
+.visit .studio{font:400 2rem/1.2 var(--serif);margin-top:1.5rem}
+.visit .unit{font-size:1.25rem}
+.visit p{margin-top:1rem}
+.btn{display:inline-block;margin-top:2rem;padding:.9rem 2.2rem;border:1px solid var(--ink);text-decoration:none;font-size:.9rem;letter-spacing:.06em;transition:background .2s,color .2s}
+.btn:hover{background:var(--ink);color:var(--cream)}
+
+footer{padding:2rem 0;text-align:center;font-size:.8rem;color:var(--gold)}
+
+@media (max-width:760px){
+  .pair .frame:last-child{margin-top:1.25rem}
+  .look,.look:nth-of-type(even){grid-template-columns:1fr;gap:1.5rem;margin-bottom:4rem}
+  .look:nth-of-type(even) .frame{order:0}
+  .look .copy{text-align:center}
+  .look .meta{justify-content:center}
+  .occasions span{display:inline-block}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="#top" id="top">Kama Gari Couture</a>
+  <nav aria-label="Main">
+    <a href="#looks">The Occasion Edit</a>
+    <a href="#visit">Visit the studio</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="pair">
+      <div class="frame"><img src="images/black-rose.jpg" alt="Black Rose: black satin drape with sculptural flowers" width="900" height="1200"></div>
+      <div class="frame"><img src="images/blush-radiance.jpg" alt="Blush Radiance: blush shimmer lehenga with embellished drape" width="900" height="1200"></div>
+    </div>
+    <div class="hero-text">
+      <h1>Indo-Western</h1>
+      <p>For every occasion worth dressing up for.</p>
+      <p class="occasions label"><span>Cocktails</span><span>Reception</span><span>Bridal</span><span>Karwa Chauth</span></p>
+    </div>
+  </section>
+
+  <section class="looks" id="looks">
+    <div class="wrap">
+      <h2>The Occasion Edit</h2>
+      <p class="intro">Six looks for evenings, receptions and celebrations. All available in sizes M to XL.</p>
+
+      <article class="look">
+        <div class="frame"><img loading="lazy" src="images/midnight-drape.jpg" alt="Midnight Drape: navy sequin blouse with draped saree skirt" width="900" height="1200"></div>
+        <div class="copy">
+          <h3>Midnight Drape</h3>
+          <p>Navy shimmer meets sculpted draping.</p>
+          <p class="meta"><span class="label">Cocktails, evening celebrations</span><span>M to XL</span></p>
+        </div>
+      </article>
+
+      <article class="look">
+        <div class="frame"><img loading="lazy" src="images/scarlet-celebration.jpg" alt="Scarlet Celebration: hot pink embellished blouse with draped saree" width="900" height="1200"></div>
+        <div class="copy">
+          <h3>Scarlet Celebration</h3>
+          <p>Statement colour with intricate sparkle.</p>
+          <p class="meta"><span class="label">Karwa Chauth, bridal celebrations</span><span>M to XL</span></p>
+        </div>
+      </article>
+
+      <article class="look">
+        <div class="frame"><img loading="lazy" src="images/liquid-metal.jpg" alt="Liquid Metal: metallic draped saree with crystal bustier" width="900" height="1200"></div>
+        <div class="copy">
+          <h3>Liquid Metal</h3>
+          <p>A luminous silhouette for an evening entrance.</p>
+          <p class="meta"><span class="label">Cocktails, reception</span><span>M to XL</span></p>
+        </div>
+      </article>
+
+      <article class="look">
+        <div class="frame"><img loading="lazy" src="images/peacock-nocturne.jpg" alt="Peacock Nocturne: navy skirt set with peacock motif" width="900" height="1200"></div>
+        <div class="copy">
+          <h3>Peacock Nocturne</h3>
+          <p>Jewel-toned detail on a flowing navy silhouette.</p>
+          <p class="meta"><span class="label">Reception, festive evenings</span><span>M to XL</span></p>
+        </div>
+      </article>
+
+      <article class="look">
+        <div class="frame"><img loading="lazy" src="images/blush-radiance.jpg" alt="Blush Radiance: blush shimmer lehenga with embellished drape" width="900" height="1200"></div>
+        <div class="copy">
+          <h3>Blush Radiance</h3>
+          <p>Soft shimmer, delicate embellishment, graceful movement.</p>
+          <p class="meta"><span class="label">Bridal celebrations, reception</span><span>M to XL</span></p>
+        </div>
+      </article>
+
+      <article class="look">
+        <div class="frame"><img loading="lazy" src="images/black-rose.jpg" alt="Black Rose: black satin drape with sculptural flowers" width="900" height="1200"></div>
+        <div class="copy">
+          <h3>Black Rose</h3>
+          <p>Sculptural florals with a dramatic satin drape.</p>
+          <p class="meta"><span class="label">Cocktails, reception</span><span>M to XL</span></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <h2>Your occasion. Your statement.</h2>
+      <p class="studio">Kama Gari Studio</p>
+      <p class="unit">A1-204</p>
+      <p>Sizes available: M to XL</p>
+      <!-- Replace with your WhatsApp, phone or booking link -->
+      <a class="btn" href="#visit">Book a visit</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; 2026 Kama Gari Couture</div>
+</footer>
+
+</body>
+</html>
