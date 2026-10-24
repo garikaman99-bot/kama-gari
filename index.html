@@ -3,185 +3,106 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kama Gari Couture | Occasion wear</title>
-<meta name="description" content="Indo-Western and lehenga occasion wear for cocktails, receptions, bridal celebrations and festive evenings.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex, nofollow">
+<title>Kama Gari Admin</title>
 <style>
-:root{--cream:#f6efe4;--sand:#e9dcc6;--ink:#25221d;--gold:#a67c52;--line:#d9cdb9;
---serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Jost",Arial,sans-serif}
+:root{--cream:#f6efe4;--sand:#e9dcc6;--ink:#25221d;--gold:#a67c52;--line:#d9cdb9}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{background:var(--cream);color:var(--ink);font:300 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-img,video{display:block;width:100%;height:100%;object-fit:cover}
-a{color:inherit}
-a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
-.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
-.label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-header{padding:1.75rem 0 0;text-align:center}
-.brand{font:400 1.5rem/1 var(--serif);letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
-header nav{margin-top:1rem;display:flex;gap:1.75rem;justify-content:center;font-size:.85rem}
-header nav a{text-decoration:none;color:var(--gold)}
-header nav a:hover{color:var(--ink)}
-.frame{background:var(--sand);aspect-ratio:3/4;position:relative;overflow:hidden}
-.frame video{position:absolute;inset:0;opacity:0;transition:opacity .3s}
-.frame.playing video{opacity:1}
-.hero{padding:3.5rem 0 0}
-.pair{display:grid;grid-template-columns:1fr 1fr}
-.pair .frame:last-child{margin-top:2.5rem}
-.hero-text{text-align:center;padding:4rem 0 5rem}
-h1{font:400 clamp(3rem,9vw,5.5rem)/1 var(--serif)}
-.hero-text p{margin-top:1rem;font-size:1.15rem}
-.looks{border-top:1px solid var(--line);padding:5rem 0 2rem}
-h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);text-align:center}
-.intro{text-align:center;margin:.75rem auto 2rem;max-width:34rem}
-.filters{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem}
-.filters button{font:inherit;font-size:.85rem;padding:.5rem 1.2rem;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer}
-.filters button[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem 2rem}
-.card h3{font:400 1.6rem/1.15 var(--serif);text-transform:uppercase;margin:1rem 0 .35rem}
-.card .label{font-size:.72rem;margin-top:.5rem}
-.card .sizes{font-size:.9rem;margin-top:.25rem}
-.badge{position:absolute;top:.75rem;left:.75rem;z-index:2;background:var(--ink);color:var(--cream);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .7rem}
-.card.sold .frame img{filter:grayscale(.7);opacity:.7}
-.btn{display:inline-block;margin-top:1rem;padding:.7rem 1.5rem;border:1px solid var(--ink);text-decoration:none;font-size:.88rem;letter-spacing:.05em;transition:background .2s,color .2s}
-.btn:hover{background:var(--ink);color:var(--cream)}
-.msg{text-align:center;padding:2rem 0 4rem;grid-column:1/-1}
-.visit{background:var(--sand);padding:5rem 0;text-align:center}
-.studio{font:400 2rem/1.2 var(--serif);margin-top:1.5rem}
-.visit p{margin-top:.75rem}
-.visit .links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-footer{padding:2rem 0;text-align:center;font-size:.8rem;color:var(--gold)}
-@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:560px){.grid{grid-template-columns:1fr;gap:3rem}.pair .frame:last-child{margin-top:1.25rem}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.frame video,.btn{transition:none}}
+body{background:var(--cream);color:var(--ink);font:400 1.05rem/1.5 Arial,sans-serif;padding:1.5rem}
+main{max-width:30rem;margin:0 auto}
+h1{font:400 1.8rem/1.2 Georgia,serif;margin-bottom:.25rem}
+.sub{color:var(--gold);margin-bottom:1.75rem}
+label{display:block;margin:1.25rem 0 .4rem;font-weight:bold}
+select,input[type=text],input[type=file]{width:100%;padding:.8rem;font:inherit;border:1px solid var(--line);background:#fff;border-radius:6px}
+.hint{font-size:.85rem;color:#6b645a;margin-top:.3rem}
+.prev{margin-top:.75rem;max-width:12rem;border-radius:6px;display:none}
+button{margin-top:1.75rem;width:100%;padding:1rem;font:inherit;font-weight:bold;background:var(--ink);color:var(--cream);border:0;border-radius:6px;cursor:pointer}
+button:disabled{opacity:.5}
+#out{margin-top:1.25rem;padding:.9rem;border-radius:6px;display:none}
+.ok{background:#e3f1e3}.err{background:#f6dcdc}
 </style>
 </head>
 <body>
-<header>
-  <a class="brand" href="#top" id="top">Kama Gari Couture</a>
-  <nav aria-label="Main"><a href="#looks">The Collection</a><a href="#visit">Visit the studio</a></nav>
-</header>
-
 <main>
-  <section class="hero wrap" id="hero" hidden>
-    <div class="pair" id="pair"></div>
-    <div class="hero-text">
-      <h1>Occasion wear</h1>
-      <p>Indo-Western and lehengas for every occasion worth dressing up for.</p>
-    </div>
-  </section>
+  <h1>Upload photos</h1>
+  <p class="sub">Kama Gari Couture</p>
 
-  <section class="looks" id="looks">
-    <div class="wrap">
-      <h2>The Collection</h2>
-      <p class="intro">Found something you love? Message us and we will share details, sizes and availability.</p>
-      <div class="filters" id="filters" role="group" aria-label="Filter by collection"></div>
-      <div class="grid" id="grid"><p class="msg">Loading designs…</p></div>
-    </div>
-  </section>
+  <label for="design">Design</label>
+  <select id="design"><option>Loading…</option></select>
+  <div id="otherWrap" hidden>
+    <label for="other">Folder name</label>
+    <input type="text" id="other" placeholder="e.g. emerald-procession" autocapitalize="off" autocorrect="off">
+    <p class="hint">Copy it from the last column of the Website tab in your sheet.</p>
+  </div>
 
-  <section class="visit" id="visit">
-    <div class="wrap">
-      <h2>Your occasion. Your statement.</h2>
-      <p class="studio">Kama Gari Studio</p>
-      <p>A1-204</p>
-      <div class="links">
-        <a class="btn" id="wa-main" href="#">Message us on WhatsApp</a>
-        <a class="btn" id="ig-main" href="#">Instagram</a>
-      </div>
-    </div>
-  </section>
+  <label for="photo">Photo</label>
+  <input type="file" id="photo" accept="image/jpeg,image/png">
+  <img id="prev" class="prev" alt="Photo preview">
+
+  <label for="video">Video (optional, short, MP4)</label>
+  <input type="file" id="video" accept="video/mp4">
+  <p class="hint">Keep it under about 10 MB.</p>
+
+  <button id="go">Upload</button>
+  <div id="out" role="status"></div>
 </main>
-<footer><div class="wrap">&copy; 2026 Kama Gari Couture</div></footer>
 
 <script>
-/* ---- EDIT THESE THREE ---- */
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbzLsTn_PsfZDag01Z2TNJuEMjG6_4h00VOz6qstDrvd6tmYY43s7ozYT1bIoK2qQzx-/exec";
-const WHATSAPP  = "91XXXXXXXXXX";      // country code + number, no + or spaces
-const INSTAGRAM = "your_handle";       // without @
-/* -------------------------- */
-
 const $ = id => document.getElementById(id);
-const wa = text => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
-$("wa-main").href = wa("Hi, I’d like to know more about your collection.");
-$("ig-main").href = `https://instagram.com/${INSTAGRAM}`;
+const out = (msg, ok) => { const o = $("out"); o.textContent = msg; o.className = ok ? "ok" : "err"; o.style.display = "block"; };
 
-function el(tag, cls, text){ const e = document.createElement(tag); if(cls) e.className = cls; if(text) e.textContent = text; return e; }
-const photo = l => `looks/${l.folder}/photo.jpg`;
-const motion = l => `looks/${l.folder}/motion.mp4`;
+fetch(SHEET_URL).then(r => r.json()).then(list => {
+  const s = $("design"); s.replaceChildren();
+  list.forEach(l => { const o = document.createElement("option"); o.value = l.folder; o.textContent = `${l.name} (${l.code})`; s.appendChild(o); });
+  const o = document.createElement("option"); o.value = "__other"; o.textContent = "Another design (type folder name)"; s.appendChild(o);
+  s.dispatchEvent(new Event("change"));
+}).catch(() => { $("design").innerHTML = '<option value="__other">Type folder name</option>'; $("design").dispatchEvent(new Event("change")); });
 
-function attachVideo(frame, look){
-  let video = null, failed = false;
-  const start = () => {
-    if(failed) return;
-    if(!video){
-      video = document.createElement("video");
-      video.muted = true; video.loop = true; video.playsInline = true; video.preload = "none";
-      video.src = motion(look);
-      video.addEventListener("error", () => { failed = true; video.remove(); frame.classList.remove("playing"); });
-      frame.appendChild(video);
-    }
-    video.play().then(() => frame.classList.add("playing")).catch(() => {});
-  };
-  const stop = () => { if(video){ video.pause(); frame.classList.remove("playing"); } };
-  frame.addEventListener("pointerenter", e => { if(e.pointerType === "mouse") start(); });
-  frame.addEventListener("pointerleave", e => { if(e.pointerType === "mouse") stop(); });
-  frame.addEventListener("click", () => frame.classList.contains("playing") ? stop() : start());
+$("design").addEventListener("change", () => { $("otherWrap").hidden = $("design").value !== "__other"; });
+
+function toJpegBase64(file, maxW = 1400){
+  return new Promise((resolve, reject) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width), c = document.createElement("canvas");
+      c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL("image/jpeg", 0.85).split(",")[1]);
+    };
+    img.onerror = () => reject(new Error("Could not read that photo"));
+    img.src = url;
+  });
+}
+const fileToBase64 = f => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(",")[1]); r.onerror = rej; r.readAsDataURL(f); });
+
+$("photo").addEventListener("change", e => {
+  const f = e.target.files[0], p = $("prev");
+  if(f){ p.src = URL.createObjectURL(f); p.style.display = "block"; } else p.style.display = "none";
+});
+
+async function send(folder, kind, data){
+  const r = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ folder, kind, data }) });
+  const j = await r.json().catch(() => ({}));
+  if(!r.ok) throw new Error(j.error || "Upload failed");
 }
 
-function card(look){
-  const status = (look.status || "").toLowerCase();
-  const c = el("article", "card" + (status === "sold" ? " sold" : ""));
-  const f = el("div", "frame");
-  const img = document.createElement("img");
-  img.src = photo(look); img.alt = look.name; img.loading = "lazy"; img.width = 900; img.height = 1200;
-  img.addEventListener("error", () => img.remove());
-  f.appendChild(img);
-  if(status === "sold" || status === "reserved") f.appendChild(el("span", "badge", look.status));
-  attachVideo(f, look);
-  c.appendChild(f);
-  c.appendChild(el("h3", "", look.name));
-  if(look.description) c.appendChild(el("p", "", look.description));
-  if(look.occasions) c.appendChild(el("p", "label", look.occasions));
-  if(look.sizes) c.appendChild(el("p", "sizes", "Sizes " + look.sizes));
-  const sold = status === "sold";
-  const a = el("a", "btn", sold ? "Ask for something similar" : "Message us about this");
-  a.href = wa(sold ? `Hi, I saw ${look.name} (${look.code}) is sold. Do you have something similar?` : `Hi, I’m interested in ${look.name} (${look.code}).`);
-  c.appendChild(a);
-  return c;
-}
-
-function render(looks, filter){
-  const grid = $("grid"); grid.replaceChildren();
-  const list = filter === "All" ? looks : looks.filter(l => l.collection === filter);
-  if(!list.length){ grid.appendChild(el("p", "msg", "New designs are arriving soon. Message us to see what is in the studio.")); return; }
-  list.forEach(l => grid.appendChild(card(l)));
-}
-
-function init(looks){
-  const hero = looks.filter(l => l.status !== "Sold").slice(0, 2);
-  if(hero.length === 2){
-    hero.forEach(l => { const f = el("div", "frame"); const i = document.createElement("img"); i.src = photo(l); i.alt = l.name; i.addEventListener("error", () => i.remove()); f.appendChild(i); $("pair").appendChild(f); });
-    $("hero").hidden = false;
-  }
-  const cols = ["All", ...new Set(looks.map(l => l.collection).filter(Boolean))];
-  const bar = $("filters");
-  if(cols.length > 2){
-    cols.forEach((name, i) => {
-      const b = el("button", "", name); b.type = "button"; b.setAttribute("aria-pressed", i === 0);
-      b.addEventListener("click", () => { bar.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); render(looks, name); });
-      bar.appendChild(b);
-    });
-  }
-  render(looks, "All");
-}
-
-fetch(SHEET_URL)
-  .then(r => r.json())
-  .then(init)
-  .catch(() => { $("grid").replaceChildren(el("p", "msg", "We couldn’t load the collection just now. Please message us on WhatsApp or Instagram to see our latest designs.")); });
+$("go").addEventListener("click", async () => {
+  const folder = ($("design").value === "__other" ? $("other").value : $("design").value).trim().toLowerCase();
+  const photo = $("photo").files[0], video = $("video").files[0];
+  if(!folder) return out("Choose a design first.", false);
+  if(!photo && !video) return out("Choose a photo or a video.", false);
+  if(video && video.size > 14e6) return out("That video is too big. Please use one under 10 MB.", false);
+  const b = $("go"); b.disabled = true; out("Uploading…", true);
+  try {
+    if(photo) await send(folder, "photo", await toJpegBase64(photo));
+    if(video) await send(folder, "video", await fileToBase64(video));
+    out("Done. The site will show it in about a minute.", true);
+    $("photo").value = ""; $("video").value = ""; $("prev").style.display = "none";
+  } catch(e){ out(e.message || "Something went wrong. Please try again.", false); }
+  b.disabled = false;
+});
 </script>
 </body>
 </html>
