@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Kama Gari Admin</title>
+<style>
+:root{--cream:#f6efe4;--sand:#e9dcc6;--ink:#25221d;--gold:#a67c52;--line:#d9cdb9}
+*{box-sizing:border-box;margin:0}
+body{background:var(--cream);color:var(--ink);font:400 1.05rem/1.5 Arial,sans-serif;padding:1.5rem}
+main{max-width:30rem;margin:0 auto}
+h1{font:400 1.8rem/1.2 Georgia,serif;margin-bottom:.25rem}
+.sub{color:var(--gold);margin-bottom:1.75rem}
+label{display:block;margin:1.25rem 0 .4rem;font-weight:bold}
+select,input[type=text],input[type=file]{width:100%;padding:.8rem;font:inherit;border:1px solid var(--line);background:#fff;border-radius:6px}
+.hint{font-size:.85rem;color:#6b645a;margin-top:.3rem}
+.prev{margin-top:.75rem;max-width:12rem;border-radius:6px;display:none}
+button{margin-top:1.75rem;width:100%;padding:1rem;font:inherit;font-weight:bold;background:var(--ink);color:var(--cream);border:0;border-radius:6px;cursor:pointer}
+button:disabled{opacity:.5}
+#out{margin-top:1.25rem;padding:.9rem;border-radius:6px;display:none}
+.ok{background:#e3f1e3}.err{background:#f6dcdc}
+</style>
+</head>
+<body>
+<main>
+  <h1>Upload photos</h1>
+  <p class="sub">Kama Gari Couture</p>
+
+  <label for="design">Design</label>
+  <select id="design"><option>Loading…</option></select>
+  <div id="otherWrap" hidden>
+    <label for="other">Folder name</label>
+    <input type="text" id="other" placeholder="e.g. emerald-procession" autocapitalize="off" autocorrect="off">
+    <p class="hint">Copy it from the last column of the Website tab in your sheet.</p>
+  </div>
+
+  <label for="photo">Photo</label>
+  <input type="file" id="photo" accept="image/jpeg,image/png">
+  <img id="prev" class="prev" alt="Photo preview">
+
+  <label for="video">Video (optional, short, MP4)</label>
+  <input type="file" id="video" accept="video/mp4">
+  <p class="hint">Keep it under about 10 MB.</p>
+
+  <button id="go">Upload</button>
+  <div id="out" role="status"></div>
+</main>
+
+<script>
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzLsTn_PsfZDag01Z2TNJuEMjG6_4h00VOz6qstDrvd6tmYY43s7ozYT1bIoK2qQzx-/exec";
+const $ = id => document.getElementById(id);
+const out = (msg, ok) => { const o = $("out"); o.textContent = msg; o.className = ok ? "ok" : "err"; o.style.display = "block"; };
+
+fetch(SHEET_URL).then(r => r.json()).then(list => {
+  const s = $("design"); s.replaceChildren();
+  list.forEach(l => { const o = document.createElement("option"); o.value = l.folder; o.textContent = `${l.name} (${l.code})`; s.appendChild(o); });
+  const o = document.createElement("option"); o.value = "__other"; o.textContent = "Another design (type folder name)"; s.appendChild(o);
+  s.dispatchEvent(new Event("change"));
+}).catch(() => { $("design").innerHTML = '<option value="__other">Type folder name</option>'; $("design").dispatchEvent(new Event("change")); });
+
+$("design").addEventListener("change", () => { $("otherWrap").hidden = $("design").value !== "__other"; });
+
+function toJpegBase64(file, maxW = 1400){
+  return new Promise((resolve, reject) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width), c = document.createElement("canvas");
+      c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL("image/jpeg", 0.85).split(",")[1]);
+    };
+    img.onerror = () => reject(new Error("Could not read that photo"));
+    img.src = url;
+  });
+}
+const fileToBase64 = f => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(",")[1]); r.onerror = rej; r.readAsDataURL(f); });
+
+$("photo").addEventListener("change", e => {
+  const f = e.target.files[0], p = $("prev");
+  if(f){ p.src = URL.createObjectURL(f); p.style.display = "block"; } else p.style.display = "none";
+});
+
+async function send(folder, kind, data){
+  const r = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ folder, kind, data }) });
+  const j = await r.json().catch(() => ({}));
+  if(!r.ok) throw new Error(j.error || "Upload failed");
+}
+
+$("go").addEventListener("click", async () => {
+  const folder = ($("design").value === "__other" ? $("other").value : $("design").value).trim().toLowerCase();
+  const photo = $("photo").files[0], video = $("video").files[0];
+  if(!folder) return out("Choose a design first.", false);
+  if(!photo && !video) return out("Choose a photo or a video.", false);
+  if(video && video.size > 14e6) return out("That video is too big. Please use one under 10 MB.", false);
+  const b = $("go"); b.disabled = true; out("Uploading…", true);
+  try {
+    if(photo) await send(folder, "photo", await toJpegBase64(photo));
+    if(video) await send(folder, "video", await fileToBase64(video));
+    out("Done. The site will show it in about a minute.", true);
+    $("photo").value = ""; $("video").value = ""; $("prev").style.display = "none";
+  } catch(e){ out(e.message || "Something went wrong. Please try again.", false); }
+  b.disabled = false;
+});
+</script>
+</body>
+</html>
 
