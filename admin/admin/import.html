@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Import photos</title>
+<style>
+body{background:#f6efe4;color:#25221d;font:400 1.05rem/1.5 Arial,sans-serif;padding:1.5rem}
+main{max-width:34rem;margin:0 auto}
+h1{font:400 1.8rem/1.2 Georgia,serif}
+p{margin:.5rem 0 1rem}
+button{width:100%;padding:1rem;font:inherit;font-weight:bold;background:#25221d;color:#f6efe4;border:0;border-radius:6px}
+button:disabled{opacity:.5}
+ul{margin-top:1.25rem;padding-left:1.1rem}
+li{margin:.2rem 0}
+#sum{margin-top:1rem;font-weight:bold}
+</style>
+</head>
+<body>
+<main>
+<h1>Import photos</h1>
+<p>Copies every design photo from the old ChatGPT site into your website, in the right folders.</p>
+<button id="go">Import all</button>
+<div id="sum"></div>
+<ul id="list"></ul>
+</main>
+<script>
+const ITEMS = [
+["midnight-drape","indo-western-01.jpg"],["scarlet-celebration","indo-western-02.jpg"],["liquid-metal","indo-western-03.jpg"],
+["peacock-nocturne","indo-western-04.jpg"],["blush-radiance","indo-western-05.jpg"],["black-rose","indo-western-06.jpg"],
+["royal-bloom","royal-blue-5068.jpg"],
+["emerald-procession","crepe-silk-01.jpg"],["royal-paisley","crepe-silk-02.jpg"],["noir-gold","crepe-silk-03.png"],
+["purple-reverie","crepe-silk-04.jpg"],["teal-mosaic","crepe-silk-05.png"],["ivory-vines","crepe-silk-06.png"],["ivory-peacock","crepe-silk-07.png"],
+["multicolour-bandhani","dandiya-01.jpg"],["ivory-paisley","dandiya-02.jpg"],["midnight-patchwork","dandiya-03.jpg"],
+["navy-motif","dandiya-04.jpg"],["mustard-bandhani","dandiya-05.jpg"],["navy-gold-patchwork","dandiya-06.jpg"],
+["navy-ivory-paisley","dandiya-07.jpg"],["forest-bandhani","dandiya-08.jpg"],["ivory-heritage","dandiya-09.jpg"],
+["midnight-tiles","dandiya-10.jpg"],["red-paisley","dandiya-11.jpg"],["teal-patchwork","dandiya-12.jpg"],["maroon-gold-patchwork","dandiya-13.jpg"]
+];
+const $ = id => document.getElementById(id);
+const ul = $("list");
+ITEMS.forEach(([f]) => { const li = document.createElement("li"); li.textContent = f; ul.appendChild(li); });
+
+async function post(body){
+  const r = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if(!r.ok){ const j = await r.json().catch(() => ({})); throw new Error(j.error || "failed"); }
+  return r;
+}
+function toJpegBase64(blob, maxW = 1400){
+  return new Promise((resolve, reject) => {
+    const img = new Image(), url = URL.createObjectURL(blob);
+    img.onload = () => {
+      const s = Math.min(1, maxW / img.width), c = document.createElement("canvas");
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL("image/jpeg", 0.85).split(",")[1]);
+    };
+    img.onerror = () => reject(new Error("unreadable image"));
+    img.src = url;
+  });
+}
+$("go").addEventListener("click", async () => {
+  const b = $("go"); b.disabled = true; let ok = 0;
+  for(let i = 0; i < ITEMS.length; i++){
+    const [folder, file] = ITEMS[i], li = ul.children[i];
+    li.textContent = folder + " …";
+    try {
+      const blob = await (await post({ fetch: "assets/" + file })).blob();
+      await post({ folder, kind: "photo", data: await toJpegBase64(blob) });
+      li.textContent = folder + " ✓"; ok++;
+    } catch(e){ li.textContent = folder + " ✗ " + e.message; }
+    $("sum").textContent = ok + " of " + ITEMS.length + " done";
+  }
+  b.disabled = false;
+});
+</script>
+</body>
+</html>
