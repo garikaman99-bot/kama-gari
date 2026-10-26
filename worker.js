@@ -1,5 +1,6 @@
 const b64urlToBytes = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(s.length / 4) * 4, '=')), c => c.charCodeAt(0));
 const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { 'Content-Type': 'application/json' } });
+const IMPORT_HOST = 'https://kama-gari-couture-lookbook.kataria-shina1.chatgpt.site/';
 
 async function verifyAccess(request, env) {
   const token = request.headers.get('Cf-Access-Jwt-Assertion');
@@ -21,6 +22,14 @@ async function upload(request, env) {
   if (!(await verifyAccess(request, env))) return json({ error: 'Not logged in' }, 401);
   let body;
   try { body = await request.json(); } catch { return json({ error: 'Bad request' }, 400); }
+
+  if (body.fetch) {
+    if (!/^assets\/[a-z0-9-]+\.(jpg|png)$/.test(body.fetch)) return json({ error: 'Invalid import path' }, 400);
+    const src = await fetch(IMPORT_HOST + body.fetch);
+    if (!src.ok) return json({ error: 'Could not fetch that image' }, 502);
+    return new Response(src.body, { headers: { 'Content-Type': src.headers.get('Content-Type') || 'image/jpeg' } });
+  }
+
   const { folder, kind, data } = body;
   if (!/^[a-z0-9-]{1,60}$/.test(folder || '')) return json({ error: 'Invalid folder name' }, 400);
   const file = kind === 'photo' ? 'photo.jpg' : kind === 'video' ? 'motion.mp4' : null;
