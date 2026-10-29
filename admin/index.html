@@ -9,24 +9,41 @@
 :root{--cream:#f6efe4;--sand:#e9dcc6;--ink:#25221d;--gold:#a67c52;--line:#d9cdb9}
 *{box-sizing:border-box;margin:0}
 body{background:var(--cream);color:var(--ink);font:400 1.05rem/1.5 Arial,sans-serif;padding:1.5rem}
-main{max-width:30rem;margin:0 auto}
+main{max-width:32rem;margin:0 auto}
 h1{font:400 1.8rem/1.2 Georgia,serif;margin-bottom:.25rem}
-.sub{color:var(--gold);margin-bottom:1.75rem}
+h2{font:400 1.3rem Georgia,serif;margin-bottom:.5rem}
+.sub{color:var(--gold);margin-bottom:1.25rem}
 label{display:block;margin:1.25rem 0 .4rem;font-weight:bold}
 select,input[type=text],input[type=file]{width:100%;padding:.8rem;font:inherit;border:1px solid var(--line);background:#fff;border-radius:6px}
 .hint{font-size:.85rem;color:#6b645a;margin-top:.3rem}
 .prev{margin-top:.75rem;max-width:12rem;border-radius:6px;display:none}
-button{margin-top:1.75rem;width:100%;padding:1rem;font:inherit;font-weight:bold;background:var(--ink);color:var(--cream);border:0;border-radius:6px;cursor:pointer}
+button{margin-top:1.5rem;width:100%;padding:1rem;font:inherit;font-weight:bold;background:var(--ink);color:var(--cream);border:0;border-radius:6px;cursor:pointer}
 button:disabled{opacity:.5}
-#out{margin-top:1.25rem;padding:.9rem;border-radius:6px;display:none}
+#out{margin-bottom:1.25rem;padding:.9rem;border-radius:6px;display:none}
 .ok{background:#e3f1e3}.err{background:#f6dcdc}
+.row{display:flex;gap:.6rem;align-items:flex-start;margin:.7rem 0;padding-bottom:.7rem;border-bottom:1px solid var(--line)}
+.row img{width:56px;height:75px;object-fit:cover;border-radius:4px;flex:none}
+.row .pick{flex:1;min-width:0}
+.row select,.row input[type=text]{width:100%;padding:.6rem}
+.row input[type=text]{margin-top:.4rem;display:none}
+.row span{width:5.5rem;font-size:.85rem;flex:none;padding-top:.6rem}
+hr{margin:2rem 0;border:0;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
 <main>
   <h1>Upload photos</h1>
   <p class="sub">Kama Gari Couture</p>
+  <div id="out" role="status"></div>
 
+  <h2>Many photos at once</h2>
+  <p class="hint">Tap Choose Files, select all the photos, then pick the design for each one. Photos named like a design folder (for example midnight-drape.jpg) are matched automatically.</p>
+  <input type="file" id="bulk" accept="image/jpeg,image/png" multiple>
+  <div id="bulkList"></div>
+  <button id="bulkGo">Upload all</button>
+
+  <hr>
+  <h2>One design (photo and video)</h2>
   <label for="design">Design</label>
   <select id="design"><option>Loading…</option></select>
   <div id="otherWrap" hidden>
@@ -44,22 +61,14 @@ button:disabled{opacity:.5}
   <p class="hint">Keep it under about 10 MB.</p>
 
   <button id="go">Upload</button>
-  <div id="out" role="status"></div>
 </main>
 
+<script src="/catalogue-loader.js"></script>
 <script>
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbzLsTn_PsfZDag01Z2TNJuEMjG6_4h00VOz6qstDrvd6tmYY43s7ozYT1bIoK2qQzx-/exec";
 const $ = id => document.getElementById(id);
 const out = (msg, ok) => { const o = $("out"); o.textContent = msg; o.className = ok ? "ok" : "err"; o.style.display = "block"; };
-
-fetch(SHEET_URL).then(r => r.json()).then(list => {
-  const s = $("design"); s.replaceChildren();
-  list.forEach(l => { const o = document.createElement("option"); o.value = l.folder; o.textContent = `${l.name} (${l.code})`; s.appendChild(o); });
-  const o = document.createElement("option"); o.value = "__other"; o.textContent = "Another design (type folder name)"; s.appendChild(o);
-  s.dispatchEvent(new Event("change"));
-}).catch(() => { $("design").innerHTML = '<option value="__other">Type folder name</option>'; $("design").dispatchEvent(new Event("change")); });
-
-$("design").addEventListener("change", () => { $("otherWrap").hidden = $("design").value !== "__other"; });
+let DESIGNS = [];
 
 function toJpegBase64(file, maxW = 1400){
   return new Promise((resolve, reject) => {
@@ -76,18 +85,65 @@ function toJpegBase64(file, maxW = 1400){
   });
 }
 const fileToBase64 = f => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(",")[1]); r.onerror = rej; r.readAsDataURL(f); });
-
-$("photo").addEventListener("change", e => {
-  const f = e.target.files[0], p = $("prev");
-  if(f){ p.src = URL.createObjectURL(f); p.style.display = "block"; } else p.style.display = "none";
-});
-
 async function send(folder, kind, data){
   const r = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ folder, kind, data }) });
   const j = await r.json().catch(() => ({}));
   if(!r.ok) throw new Error(j.error || "Upload failed");
 }
 
+/* ---- design list ---- */
+loadCatalogue(SHEET_URL).then(list => {
+  DESIGNS = list;
+  const s = $("design"); s.replaceChildren();
+  list.forEach(l => { const o = document.createElement("option"); o.value = l.folder; o.textContent = `${l.name} (${l.code})`; s.appendChild(o); });
+  const o = document.createElement("option"); o.value = "__other"; o.textContent = "Another design (type folder name)"; s.appendChild(o);
+  s.dispatchEvent(new Event("change"));
+}).catch(() => { $("design").innerHTML = '<option value="__other">Type folder name</option>'; $("design").dispatchEvent(new Event("change")); });
+$("design").addEventListener("change", () => { $("otherWrap").hidden = $("design").value !== "__other"; });
+
+/* ---- many photos at once ---- */
+const slug = s => s.toLowerCase().replace(/\.[^.]+$/, "").replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
+const guess = f => { const n = slug(f.name); const hit = DESIGNS.find(d => d.folder === n) || DESIGNS.find(d => n.length > 3 && d.folder.startsWith(n)); return hit ? hit.folder : ""; };
+$("bulk").addEventListener("change", () => {
+  const box = $("bulkList"); box.replaceChildren();
+  [...$("bulk").files].forEach(f => {
+    const row = document.createElement("div"); row.className = "row";
+    const im = document.createElement("img"); im.src = URL.createObjectURL(f);
+    const pick = document.createElement("div"); pick.className = "pick";
+    const sel = document.createElement("select");
+    const first = document.createElement("option"); first.value = ""; first.textContent = "Choose design…"; sel.appendChild(first);
+    DESIGNS.forEach(d => { const o = document.createElement("option"); o.value = d.folder; o.textContent = d.code + " " + d.name; sel.appendChild(o); });
+    const oth = document.createElement("option"); oth.value = "__other"; oth.textContent = "Another (type folder name)"; sel.appendChild(oth);
+    const txt = document.createElement("input"); txt.type = "text"; txt.placeholder = "folder-name"; txt.autocapitalize = "off"; txt.autocorrect = "off";
+    sel.addEventListener("change", () => { txt.style.display = sel.value === "__other" ? "block" : "none"; });
+    sel.value = guess(f);
+    pick.append(sel, txt);
+    const st = document.createElement("span");
+    row.append(im, pick, st); box.appendChild(row);
+  });
+});
+$("bulkGo").addEventListener("click", async () => {
+  const files = [...$("bulk").files], rows = [...$("bulkList").children];
+  if(!files.length) return out("Choose the photos first.", false);
+  const b = $("bulkGo"); b.disabled = true; let okCount = 0;
+  for(let i = 0; i < files.length; i++){
+    const sel = rows[i].querySelector("select"), txt = rows[i].querySelector("input"), st = rows[i].querySelector("span");
+    const folder = sel.value === "__other" ? slug(txt.value) : sel.value;
+    if(!folder){ st.textContent = "✗ choose design"; continue; }
+    st.textContent = "uploading…";
+    try { await send(folder, "photo", await toJpegBase64(files[i])); st.textContent = "✓ done"; okCount++; }
+    catch(e){ st.textContent = "✗ " + (e.message || "failed"); }
+  }
+  b.disabled = false;
+  out(okCount + " of " + files.length + " uploaded. The site will show them in about a minute.", okCount === files.length);
+  window.scrollTo(0, 0);
+});
+
+/* ---- one design ---- */
+$("photo").addEventListener("change", e => {
+  const f = e.target.files[0], p = $("prev");
+  if(f){ p.src = URL.createObjectURL(f); p.style.display = "block"; } else p.style.display = "none";
+});
 $("go").addEventListener("click", async () => {
   const folder = ($("design").value === "__other" ? $("other").value : $("design").value).trim().toLowerCase();
   const photo = $("photo").files[0], video = $("video").files[0];
@@ -102,8 +158,8 @@ $("go").addEventListener("click", async () => {
     $("photo").value = ""; $("video").value = ""; $("prev").style.display = "none";
   } catch(e){ out(e.message || "Something went wrong. Please try again.", false); }
   b.disabled = false;
+  window.scrollTo(0, 0);
 });
 </script>
 </body>
 </html>
-
