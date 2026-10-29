@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Kama Gari Admin</title>
+<style>
+:root{--cream:#f6efe4;--sand:#e9dcc6;--ink:#25221d;--gold:#a67c52;--line:#d9cdb9}
+*{box-sizing:border-box;margin:0}
+body{background:var(--cream);color:var(--ink);font:400 1.05rem/1.5 Arial,sans-serif;padding:1.5rem}
+main{max-width:32rem;margin:0 auto}
+h1{font:400 1.8rem/1.2 Georgia,serif;margin-bottom:.25rem}
+h2{font:400 1.3rem Georgia,serif;margin-bottom:.5rem}
+.sub{color:var(--gold);margin-bottom:1.25rem}
+label{display:block;margin:1.25rem 0 .4rem;font-weight:bold}
+select,input[type=text],input[type=file]{width:100%;padding:.8rem;font:inherit;border:1px solid var(--line);background:#fff;border-radius:6px}
+.hint{font-size:.85rem;color:#6b645a;margin-top:.3rem}
+.prev{margin-top:.75rem;max-width:12rem;border-radius:6px;display:none}
+button{margin-top:1.5rem;width:100%;padding:1rem;font:inherit;font-weight:bold;background:var(--ink);color:var(--cream);border:0;border-radius:6px;cursor:pointer}
+button:disabled{opacity:.5}
+#out{margin-bottom:1.25rem;padding:.9rem;border-radius:6px;display:none}
+.ok{background:#e3f1e3}.err{background:#f6dcdc}
+.row{display:flex;gap:.6rem;align-items:flex-start;margin:.7rem 0;padding-bottom:.7rem;border-bottom:1px solid var(--line)}
+.row img{width:56px;height:75px;object-fit:cover;border-radius:4px;flex:none}
+.row .pick{flex:1;min-width:0}
+.row select,.row input[type=text]{width:100%;padding:.6rem}
+.row input[type=text]{margin-top:.4rem;display:none}
+.row span{width:5.5rem;font-size:.85rem;flex:none;padding-top:.6rem}
+hr{margin:2rem 0;border:0;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Upload photos</h1>
+  <p class="sub">Kama Gari Couture</p>
+  <div id="out" role="status"></div>
+
+  <h2>Many photos at once</h2>
+  <p class="hint">Tap Choose Files, select all the photos, then pick the design for each one. Photos named like a design folder (for example midnight-drape.jpg) are matched automatically.</p>
+  <input type="file" id="bulk" accept="image/jpeg,image/png" multiple>
+  <div id="bulkList"></div>
+  <button id="bulkGo">Upload all</button>
+
+  <hr>
+  <h2>One design (photo and video)</h2>
+  <label for="design">Design</label>
+  <select id="design"><option>Loading…</option></select>
+  <div id="otherWrap" hidden>
+    <label for="other">Folder name</label>
+    <input type="text" id="other" placeholder="e.g. emerald-procession" autocapitalize="off" autocorrect="off">
+    <p class="hint">Copy it from the last column of the Website tab in your sheet.</p>
+  </div>
+
+  <label for="photo">Photo</label>
+  <input type="file" id="photo" accept="image/jpeg,image/png">
+  <img id="prev" class="prev" alt="Photo preview">
+
+  <label for="video">Video (optional, short, MP4)</label>
+  <input type="file" id="video" accept="video/mp4">
+  <p class="hint">Keep it under about 10 MB.</p>
+
+  <button id="go">Upload</button>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const out = (msg, ok) => { const o = $("out"); o.textContent = msg; o.className = ok ? "ok" : "err"; o.style.display = "block"; };
+const DESIGNS = [["LH-01", "Emerald Procession", "emerald-procession"], ["LH-02", "Royal Paisley", "royal-paisley"], ["LH-03", "Noir Gold", "noir-gold"], ["LH-04", "Purple Reverie", "purple-reverie"], ["LH-05", "Teal Mosaic", "teal-mosaic"], ["LH-06", "Ivory Vines", "ivory-vines"], ["LH-07", "Ivory Peacock", "ivory-peacock"], ["LH-08", "Multicolour Bandhani", "multicolour-bandhani"], ["LH-09", "Ivory Paisley", "ivory-paisley"], ["LH-10", "Midnight Patchwork", "midnight-patchwork"], ["LH-11", "Navy Motif", "navy-motif"], ["LH-12", "Mustard Bandhani", "mustard-bandhani"], ["LH-13", "Navy Gold Patchwork", "navy-gold-patchwork"], ["LH-14", "Navy Ivory Paisley", "navy-ivory-paisley"], ["LH-15", "Forest Bandhani", "forest-bandhani"], ["LH-16", "Ivory Heritage", "ivory-heritage"], ["LH-17", "Midnight Tiles", "midnight-tiles"], ["LH-18", "Red Paisley", "red-paisley"], ["LH-19", "Teal Patchwork", "teal-patchwork"], ["LH-20", "Maroon Gold Patchwork", "maroon-gold-patchwork"], ["UL-01", "Brick Red Paisley Lehenga Ensemble", "ul-01-brick-red-paisley-lehenga-ensemble"], ["UL-02", "Cream geometric lehenga with magenta dupatt", "ul-02-cream-geometric-lehenga-with-magenta-dupatt"], ["UL-03", "Elegant red bandhani lehenga", "ul-03-elegant-red-bandhani-lehenga"], ["UL-04", "Folk patchwork lehenga", "ul-04-folk-patchwork-lehenga"], ["UL-05", "Ivory and mustard zigzag lehenga", "ul-05-ivory-and-mustard-zigzag-lehenga"], ["UL-06", "Magenta Floral Lehenga", "ul-06-magenta-floral-lehenga"], ["UL-07", "Mustard teal coral lehenga", "ul-07-mustard-teal-coral-lehenga"], ["UL-08", "Navy Geometric Lehenga", "ul-08-navy-geometric-lehenga"], ["UL-09", "Patchwork lehenga with striped dupatta", "ul-09-patchwork-lehenga-with-striped-dupatta"], ["UL-10", "Patchwork lehenga with turquoise dupatta", "ul-10-patchwork-lehenga-with-turquoise-dupatta"], ["IW-01", "Midnight Drape", "midnight-drape"], ["IW-02", "Scarlet Celebration", "scarlet-celebration"], ["IW-03", "Liquid Metal", "liquid-metal"], ["IW-04", "Peacock Nocturne", "peacock-nocturne"], ["IW-05", "Blush Radiance", "blush-radiance"], ["IW-06", "Black Rose", "black-rose"], ["WIN-PREVIEW-1", "Sage embroidered winter ensemble", "sage-embroidered-winter-ensemble"], ["WIN-PREVIEW-2", "Onion Pink Embroidered Winter Kurta Portrait", "onion-pink-embroidered-winter-kurta-portrait"], ["WIN-PREVIEW-3", "Grey-mauve embroidered winter salwar suit", "grey-mauve-embroidered-winter-salwar-suit"], ["WIN-PREVIEW-4", "Warm Brown Floral Winter Co-ord", "warm-brown-floral-winter-co-ord"], ["WIN-PREVIEW-5", "Maroon Embroidered Winter Kurta Portrait", "maroon-embroidered-winter-kurta-portrait"]].map(d => ({code:d[0], name:d[1], folder:d[2]}));
+
+function toJpegBase64(file, maxW = 1400){
+  return new Promise((resolve, reject) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width), c = document.createElement("canvas");
+      c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL("image/jpeg", 0.85).split(",")[1]);
+    };
+    img.onerror = () => reject(new Error("Could not read that photo"));
+    img.src = url;
+  });
+}
+const fileToBase64 = f => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(",")[1]); r.onerror = rej; r.readAsDataURL(f); });
+async function send(folder, kind, data){
+  const r = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ folder, kind, data }) });
+  const j = await r.json().catch(() => ({}));
+  if(!r.ok) throw new Error(j.error || "Upload failed");
+}
+
+/* ---- design list ---- */
+(function(){
+  const s = $("design"); s.replaceChildren();
+  DESIGNS.forEach(l => { const o = document.createElement("option"); o.value = l.folder; o.textContent = `${l.name} (${l.code})`; s.appendChild(o); });
+  const o = document.createElement("option"); o.value = "__other"; o.textContent = "Another design (type folder name)"; s.appendChild(o);
+})();
+$("design").addEventListener("change", () => { $("otherWrap").hidden = $("design").value !== "__other"; });
+
+/* ---- many photos at once ---- */
+const slug = s => s.toLowerCase().replace(/\.[^.]+$/, "").replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
+const guess = f => { const n = slug(f.name); const hit = DESIGNS.find(d => d.folder === n) || DESIGNS.find(d => n.length > 3 && d.folder.startsWith(n)); return hit ? hit.folder : ""; };
+$("bulk").addEventListener("change", () => {
+  const box = $("bulkList"); box.replaceChildren();
+  [...$("bulk").files].forEach(f => {
+    const row = document.createElement("div"); row.className = "row";
+    const im = document.createElement("img"); im.src = URL.createObjectURL(f);
+    const pick = document.createElement("div"); pick.className = "pick";
+    const sel = document.createElement("select");
+    const first = document.createElement("option"); first.value = ""; first.textContent = "Choose design…"; sel.appendChild(first);
+    DESIGNS.forEach(d => { const o = document.createElement("option"); o.value = d.folder; o.textContent = d.code + " " + d.name; sel.appendChild(o); });
+    const oth = document.createElement("option"); oth.value = "__other"; oth.textContent = "Another (type folder name)"; sel.appendChild(oth);
+    const txt = document.createElement("input"); txt.type = "text"; txt.placeholder = "folder-name"; txt.autocapitalize = "off"; txt.autocorrect = "off";
+    sel.addEventListener("change", () => { txt.style.display = sel.value === "__other" ? "block" : "none"; });
+    sel.value = guess(f);
+    pick.append(sel, txt);
+    const st = document.createElement("span");
+    row.append(im, pick, st); box.appendChild(row);
+  });
+});
+$("bulkGo").addEventListener("click", async () => {
+  const files = [...$("bulk").files], rows = [...$("bulkList").children];
+  if(!files.length) return out("Choose the photos first.", false);
+  const b = $("bulkGo"); b.disabled = true; let okCount = 0;
+  for(let i = 0; i < files.length; i++){
+    const sel = rows[i].querySelector("select"), txt = rows[i].querySelector("input"), st = rows[i].querySelector("span");
+    const folder = sel.value === "__other" ? slug(txt.value) : sel.value;
+    if(!folder){ st.textContent = "✗ choose design"; continue; }
+    st.textContent = "uploading…";
+    try { await send(folder, "photo", await toJpegBase64(files[i])); st.textContent = "✓ done"; okCount++; }
+    catch(e){ st.textContent = "✗ " + (e.message || "failed"); }
+  }
+  b.disabled = false;
+  out(okCount + " of " + files.length + " uploaded. The site will show them in about a minute.", okCount === files.length);
+  window.scrollTo(0, 0);
+});
+
+/* ---- one design ---- */
+$("photo").addEventListener("change", e => {
+  const f = e.target.files[0], p = $("prev");
+  if(f){ p.src = URL.createObjectURL(f); p.style.display = "block"; } else p.style.display = "none";
+});
+$("go").addEventListener("click", async () => {
+  const folder = ($("design").value === "__other" ? $("other").value : $("design").value).trim().toLowerCase();
+  const photo = $("photo").files[0], video = $("video").files[0];
+  if(!folder) return out("Choose a design first.", false);
+  if(!photo && !video) return out("Choose a photo or a video.", false);
+  if(video && video.size > 14e6) return out("That video is too big. Please use one under 10 MB.", false);
+  const b = $("go"); b.disabled = true; out("Uploading…", true);
+  try {
+    if(photo) await send(folder, "photo", await toJpegBase64(photo));
+    if(video) await send(folder, "video", await fileToBase64(video));
+    out("Done. The site will show it in about a minute.", true);
+    $("photo").value = ""; $("video").value = ""; $("prev").style.display = "none";
+  } catch(e){ out(e.message || "Something went wrong. Please try again.", false); }
+  b.disabled = false;
+  window.scrollTo(0, 0);
+});
+</script>
+</body>
+</html>
