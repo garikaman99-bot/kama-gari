@@ -14,7 +14,7 @@
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
 body{background:var(--cream);color:var(--ink);font:300 1.0625rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-img,video{display:block;width:100%;height:100%;object-fit:cover}
+img,video{display:block;width:100%;height:100%;object-fit:contain}
 a{color:inherit}
 a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
@@ -69,7 +69,7 @@ footer{padding:2rem 0;text-align:center;font-size:.8rem;color:var(--gold)}
     <div class="pair" id="pair"></div>
     <div class="hero-text">
       <h1>Occasion wear</h1>
-      <p>Indo-Western and lehengas for every occasion worth dressing up for.</p>
+      <p>Indo-Western, unique lehengas and winter favourites.</p>
     </div>
   </section>
 
@@ -96,9 +96,10 @@ footer{padding:2rem 0;text-align:center;font-size:.8rem;color:var(--gold)}
 </main>
 <footer><div class="wrap">&copy; 2026 Kama Gari Couture</div></footer>
 
+<script src="/catalogue-loader.js"></script>
 <script>
 /* ---- EDIT THESE THREE ---- */
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzLsTn_PsfZDag01Z2TNJuEMjG6_4h00VOz6qstDrvd6tmYY43s7ozYT1bIoK2qQzx-/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbyZkizpc6i03nmVnPzsJKBSMJCqyFeobHiANhRj098cRDPJO_B21B1SHlpnILSwH3yq/exec";
 const WHATSAPP  = "916366217778";
 const INSTAGRAM = "kaman.gari";
 /* -------------------------- */
@@ -140,7 +141,7 @@ function card(look){
   img.addEventListener("error", () => img.remove());
   f.appendChild(img);
   if(status === "sold" || status === "reserved") f.appendChild(el("span", "badge", look.status));
-  attachVideo(f, look);
+  if(look.hasVideo) attachVideo(f, look);
   c.appendChild(f);
   c.appendChild(el("h3", "", look.name));
   if(look.description) c.appendChild(el("p", "", look.description));
@@ -153,20 +154,29 @@ function card(look){
   return c;
 }
 
+const GROUPS = ["Indo-Western", "Lehenga", "Unique Lehenga", "Winter Collection"];
+function groupOf(l){
+  const c = (l.collection || "").toLowerCase();
+  if(c.includes("indo")) return "Indo-Western";
+  if(c.includes("winter")) return "Winter Collection";
+  if(c.includes("unique")) return "Unique Lehenga";
+  return "Lehenga";
+}
+
 function render(looks, filter){
   const grid = $("grid"); grid.replaceChildren();
-  const list = filter === "All" ? looks : looks.filter(l => l.collection === filter);
+  const list = filter === "All" ? looks : looks.filter(l => groupOf(l) === filter);
   if(!list.length){ grid.appendChild(el("p", "msg", "New designs are arriving soon. Message us to see what is in the studio.")); return; }
   list.forEach(l => grid.appendChild(card(l)));
 }
 
 function init(looks){
-  const hero = looks.filter(l => l.status !== "Sold").slice(0, 2);
+  const hero = looks.filter(l => (l.status || "").toLowerCase() !== "sold").slice(0, 2);
   if(hero.length === 2){
     hero.forEach(l => { const f = el("div", "frame"); const i = document.createElement("img"); i.src = photo(l); i.alt = l.name; i.addEventListener("error", () => i.remove()); f.appendChild(i); $("pair").appendChild(f); });
     $("hero").hidden = false;
   }
-  const cols = ["All", ...new Set(looks.map(l => l.collection).filter(Boolean))];
+  const cols = ["All", ...GROUPS.filter(g => looks.some(l => groupOf(l) === g))];
   const bar = $("filters");
   if(cols.length > 2){
     cols.forEach((name, i) => {
@@ -178,10 +188,10 @@ function init(looks){
   render(looks, "All");
 }
 
-fetch(SHEET_URL)
-  .then(r => r.json())
+loadCatalogue(SHEET_URL)
   .then(init)
   .catch(() => { $("grid").replaceChildren(el("p", "msg", "We couldn’t load the collection just now. Please message us on WhatsApp or Instagram to see our latest designs.")); });
 </script>
 </body>
 </html>
+

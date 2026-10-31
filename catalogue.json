@@ -1,0 +1,402 @@
+[
+  {
+    "code": "LH-01",
+    "name": "Emerald Procession",
+    "collection": "Crepe Silk",
+    "description": "Emerald-green crepe silk lehenga with elephant motifs and navy folk border.",
+    "occasions": "",
+    "sizes": "",
+    "status": "Available",
+    "folder": "emerald-procession"
+  },
+  {
+    "code": "LH-02",
+    "name": "Royal Paisley",
+    "collection": "Crepe Silk",
+    "description": "Royal-blue crepe silk lehenga with paisley motifs and multicolour dupatta.",
+    "occasions": "",
+    "sizes": "",
+    "status": "Available",
+    "folder": "royal-paisley"
+  },
+  {
+    "code": "LH-03",
+    "name": "Noir Gold",
+    "collection": "Crepe Silk",
+    "description": "Black-and-gold crepe silk lehenga with floral print and paisley hem.",
+    "occasions": "",
+    "sizes": "",
+    "status": "Available",
+    "folder": "noir-gold"
+  },
+  {
+    "code": "LH-04",
+    "name": "Purple Reverie",
+    "collection": "Crepe Silk",
+    "description": "Purple crepe silk lehenga with gold motifs and paisley border.",
+    "occasions": "",
+    "sizes": "",
+    "status": "Available",
+    "folder": "purple-reverie"
+  },
+  {
+    "code": "LH-05",
+    "name": "Teal Mosaic",
+    "collection": "Crepe Silk",
+    "description": "Teal, coral and mustard crepe silk lehenga with ornamental checks.",
+    "occasions": "",
+    "sizes": "",
+    "status": "Available",
+    "folder": "teal-mosaic"
+  },
+  {
+    "code": "LH-06",
+    "name": "Ivory Vines",
+    "collection": "Crepe Silk",
+    "description": "Ivory-and-emerald crepe silk lehenga with paisley vines and procession border.",
+    "occasions": "",
+    "sizes": "",
+    "status": "Available",
+    "folder": "ivory-vines"
+  },
+  {
+    "code": "LH-07",
+    "name": "Ivory Peacock",
+    "collection": "Crepe Silk",
+    "description": "Ivory crepe silk lehenga with maroon and navy peacock motifs.",
+    "occasions": "",
+    "sizes": "",
+    "status": "Available",
+    "folder": "ivory-peacock"
+  },
+  {
+    "code": "LH-08",
+    "name": "Multicolour Bandhani",
+    "collection": "Dandiya Lehengas",
+    "description": "Lehenga with multicolour vertical bandhani-inspired panels and a striped dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "multicolour-bandhani"
+  },
+  {
+    "code": "LH-09",
+    "name": "Ivory Paisley",
+    "collection": "Dandiya Lehengas",
+    "description": "Ivory lehenga with colourful paisley motifs and burgundy dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "ivory-paisley"
+  },
+  {
+    "code": "LH-10",
+    "name": "Midnight Patchwork",
+    "collection": "Dandiya Lehengas",
+    "description": "Dark lehenga with multicolour geometric patchwork motifs and patterned dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "midnight-patchwork"
+  },
+  {
+    "code": "LH-11",
+    "name": "Navy Motif",
+    "collection": "Dandiya Lehengas",
+    "description": "Navy lehenga with multicolour folk-inspired motifs and a coordinating patterned dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "navy-motif"
+  },
+  {
+    "code": "LH-12",
+    "name": "Mustard Bandhani",
+    "collection": "Dandiya Lehengas",
+    "description": "Mustard-and-ivory lehenga with bandhani-inspired patterns and multicolour dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "mustard-bandhani"
+  },
+  {
+    "code": "LH-13",
+    "name": "Navy Gold Patchwork",
+    "collection": "Dandiya Lehengas",
+    "description": "Navy-and-gold lehenga with geometric patchwork pattern and striped dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "navy-gold-patchwork"
+  },
+  {
+    "code": "LH-14",
+    "name": "Navy Ivory Paisley",
+    "collection": "Dandiya Lehengas",
+    "description": "Navy lehenga with ivory paisley motifs and multicolour striped dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "navy-ivory-paisley"
+  },
+  {
+    "code": "LH-15",
+    "name": "Forest Bandhani",
+    "collection": "Dandiya Lehengas",
+    "description": "Forest-green lehenga with bandhani-inspired circular motifs and patterned dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "forest-bandhani"
+  },
+  {
+    "code": "LH-16",
+    "name": "Ivory Heritage",
+    "collection": "Dandiya Lehengas",
+    "description": "Ivory lehenga with multicolour folk motifs and a contrasting decorative border.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "ivory-heritage"
+  },
+  {
+    "code": "LH-17",
+    "name": "Midnight Tiles",
+    "collection": "Dandiya Lehengas",
+    "description": "Dark lehenga with repeating multicolour tile-like geometric motifs and striped dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "midnight-tiles"
+  },
+  {
+    "code": "LH-18",
+    "name": "Red Paisley",
+    "collection": "Dandiya Lehengas",
+    "description": "Brick-red lehenga with large paisley motifs and coordinating striped dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "red-paisley"
+  },
+  {
+    "code": "LH-19",
+    "name": "Teal Patchwork",
+    "collection": "Dandiya Lehengas",
+    "description": "Multicolour geometric patchwork lehenga with turquoise patterned dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "teal-patchwork"
+  },
+  {
+    "code": "LH-20",
+    "name": "Maroon Gold Patchwork",
+    "collection": "Dandiya Lehengas",
+    "description": "Maroon-and-gold patchwork lehenga with fuchsia dupatta.",
+    "occasions": "Dandiya",
+    "sizes": "",
+    "status": "Available",
+    "folder": "maroon-gold-patchwork"
+  },
+  {
+    "code": "UL-01",
+    "name": "Brick Red Paisley Lehenga Ensemble",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-01-brick-red-paisley-lehenga-ensemble"
+  },
+  {
+    "code": "UL-02",
+    "name": "Cream geometric lehenga with magenta dupatt",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-02-cream-geometric-lehenga-with-magenta-dupatt"
+  },
+  {
+    "code": "UL-03",
+    "name": "Elegant red bandhani lehenga",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-03-elegant-red-bandhani-lehenga"
+  },
+  {
+    "code": "UL-04",
+    "name": "Folk patchwork lehenga",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-04-folk-patchwork-lehenga"
+  },
+  {
+    "code": "UL-05",
+    "name": "Ivory and mustard zigzag lehenga",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-05-ivory-and-mustard-zigzag-lehenga"
+  },
+  {
+    "code": "UL-06",
+    "name": "Magenta Floral Lehenga",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-06-magenta-floral-lehenga"
+  },
+  {
+    "code": "UL-07",
+    "name": "Mustard teal coral lehenga",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-07-mustard-teal-coral-lehenga"
+  },
+  {
+    "code": "UL-08",
+    "name": "Navy Geometric Lehenga",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-08-navy-geometric-lehenga"
+  },
+  {
+    "code": "UL-09",
+    "name": "Patchwork lehenga with striped dupatta",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-09-patchwork-lehenga-with-striped-dupatta"
+  },
+  {
+    "code": "UL-10",
+    "name": "Patchwork lehenga with turquoise dupatta",
+    "collection": "Unique Lehenga Styling",
+    "description": "Additional lehenga styling view. Please enquire about availability.",
+    "occasions": "",
+    "sizes": "",
+    "status": "",
+    "folder": "ul-10-patchwork-lehenga-with-turquoise-dupatta"
+  },
+  {
+    "code": "IW-01",
+    "name": "Midnight Drape",
+    "collection": "Indo-Western",
+    "description": "Navy shimmer meets sculpted draping.",
+    "occasions": "Cocktails, Evening celebrations",
+    "sizes": "M - XL",
+    "status": "Sold",
+    "folder": "midnight-drape"
+  },
+  {
+    "code": "IW-02",
+    "name": "Scarlet Celebration",
+    "collection": "Indo-Western",
+    "description": "Statement colour with intricate sparkle.",
+    "occasions": "Karwa Chauth, Bridal celebrations",
+    "sizes": "M - XL",
+    "status": "Available",
+    "folder": "scarlet-celebration"
+  },
+  {
+    "code": "IW-03",
+    "name": "Liquid Metal",
+    "collection": "Indo-Western",
+    "description": "A luminous silhouette for an evening entrance.",
+    "occasions": "Cocktails, Reception",
+    "sizes": "M - XL",
+    "status": "Available",
+    "folder": "liquid-metal"
+  },
+  {
+    "code": "IW-04",
+    "name": "Peacock Nocturne",
+    "collection": "Indo-Western",
+    "description": "Jewel-toned detail on a flowing navy silhouette.",
+    "occasions": "Reception, Festive evenings",
+    "sizes": "M - XL",
+    "status": "Available",
+    "folder": "peacock-nocturne"
+  },
+  {
+    "code": "IW-05",
+    "name": "Blush Radiance",
+    "collection": "Indo-Western",
+    "description": "Soft shimmer, delicate embellishment, graceful movement.",
+    "occasions": "Bridal celebrations, Reception",
+    "sizes": "M - XL",
+    "status": "Available",
+    "folder": "blush-radiance"
+  },
+  {
+    "code": "IW-06",
+    "name": "Black Rose",
+    "collection": "Indo-Western",
+    "description": "Sculptural florals with a dramatic satin drape.",
+    "occasions": "Cocktails, Reception",
+    "sizes": "M - XL",
+    "status": "Available",
+    "folder": "black-rose"
+  },
+  {
+    "code": "WIN-PREVIEW-1",
+    "name": "Sage embroidered winter ensemble",
+    "collection": "Winter Collection",
+    "description": "Winter collection preview. Message us for sizes and availability.",
+    "status": "",
+    "folder": "sage-embroidered-winter-ensemble"
+  },
+  {
+    "code": "WIN-PREVIEW-2",
+    "name": "Onion Pink Embroidered Winter Kurta Portrait",
+    "collection": "Winter Collection",
+    "description": "Winter collection preview. Message us for sizes and availability.",
+    "status": "",
+    "folder": "onion-pink-embroidered-winter-kurta-portrait"
+  },
+  {
+    "code": "WIN-PREVIEW-3",
+    "name": "Grey-mauve embroidered winter salwar suit",
+    "collection": "Winter Collection",
+    "description": "Winter collection preview. Message us for sizes and availability.",
+    "status": "",
+    "folder": "grey-mauve-embroidered-winter-salwar-suit"
+  },
+  {
+    "code": "WIN-PREVIEW-4",
+    "name": "Warm Brown Floral Winter Co-ord",
+    "collection": "Winter Collection",
+    "description": "Winter collection preview. Message us for sizes and availability.",
+    "status": "",
+    "folder": "warm-brown-floral-winter-co-ord"
+  },
+  {
+    "code": "WIN-PREVIEW-5",
+    "name": "Maroon Embroidered Winter Kurta Portrait",
+    "collection": "Winter Collection",
+    "description": "Winter collection preview. Message us for sizes and availability.",
+    "status": "",
+    "folder": "maroon-embroidered-winter-kurta-portrait"
+  }
+]
