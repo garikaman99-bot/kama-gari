@@ -63,12 +63,10 @@ hr{margin:2rem 0;border:0;border-top:1px solid var(--line)}
   <button id="go">Upload</button>
 </main>
 
-<script src="/catalogue-loader.js"></script>
 <script>
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzLsTn_PsfZDag01Z2TNJuEMjG6_4h00VOz6qstDrvd6tmYY43s7ozYT1bIoK2qQzx-/exec";
 const $ = id => document.getElementById(id);
 const out = (msg, ok) => { const o = $("out"); o.textContent = msg; o.className = ok ? "ok" : "err"; o.style.display = "block"; };
-let DESIGNS = [];
+const DESIGNS = [["LH-01", "Emerald Procession", "emerald-procession"], ["LH-02", "Royal Paisley", "royal-paisley"], ["LH-03", "Noir Gold", "noir-gold"], ["LH-04", "Purple Reverie", "purple-reverie"], ["LH-05", "Teal Mosaic", "teal-mosaic"], ["LH-06", "Ivory Vines", "ivory-vines"], ["LH-07", "Ivory Peacock", "ivory-peacock"], ["LH-08", "Multicolour Bandhani", "multicolour-bandhani"], ["LH-09", "Ivory Paisley", "ivory-paisley"], ["LH-10", "Midnight Patchwork", "midnight-patchwork"], ["LH-11", "Navy Motif", "navy-motif"], ["LH-12", "Mustard Bandhani", "mustard-bandhani"], ["LH-13", "Navy Gold Patchwork", "navy-gold-patchwork"], ["LH-14", "Navy Ivory Paisley", "navy-ivory-paisley"], ["LH-15", "Forest Bandhani", "forest-bandhani"], ["LH-16", "Ivory Heritage", "ivory-heritage"], ["LH-17", "Midnight Tiles", "midnight-tiles"], ["LH-18", "Red Paisley", "red-paisley"], ["LH-19", "Teal Patchwork", "teal-patchwork"], ["LH-20", "Maroon Gold Patchwork", "maroon-gold-patchwork"], ["UL-01", "Brick Red Paisley Lehenga Ensemble", "ul-01-brick-red-paisley-lehenga-ensemble"], ["UL-02", "Cream geometric lehenga with magenta dupatt", "ul-02-cream-geometric-lehenga-with-magenta-dupatt"], ["UL-03", "Elegant red bandhani lehenga", "ul-03-elegant-red-bandhani-lehenga"], ["UL-04", "Folk patchwork lehenga", "ul-04-folk-patchwork-lehenga"], ["UL-05", "Ivory and mustard zigzag lehenga", "ul-05-ivory-and-mustard-zigzag-lehenga"], ["UL-06", "Magenta Floral Lehenga", "ul-06-magenta-floral-lehenga"], ["UL-07", "Mustard teal coral lehenga", "ul-07-mustard-teal-coral-lehenga"], ["UL-08", "Navy Geometric Lehenga", "ul-08-navy-geometric-lehenga"], ["UL-09", "Patchwork lehenga with striped dupatta", "ul-09-patchwork-lehenga-with-striped-dupatta"], ["UL-10", "Patchwork lehenga with turquoise dupatta", "ul-10-patchwork-lehenga-with-turquoise-dupatta"], ["IW-01", "Midnight Drape", "midnight-drape"], ["IW-02", "Scarlet Celebration", "scarlet-celebration"], ["IW-03", "Liquid Metal", "liquid-metal"], ["IW-04", "Peacock Nocturne", "peacock-nocturne"], ["IW-05", "Blush Radiance", "blush-radiance"], ["IW-06", "Black Rose", "black-rose"], ["WIN-PREVIEW-1", "Sage embroidered winter ensemble", "sage-embroidered-winter-ensemble"], ["WIN-PREVIEW-2", "Onion Pink Embroidered Winter Kurta Portrait", "onion-pink-embroidered-winter-kurta-portrait"], ["WIN-PREVIEW-3", "Grey-mauve embroidered winter salwar suit", "grey-mauve-embroidered-winter-salwar-suit"], ["WIN-PREVIEW-4", "Warm Brown Floral Winter Co-ord", "warm-brown-floral-winter-co-ord"], ["WIN-PREVIEW-5", "Maroon Embroidered Winter Kurta Portrait", "maroon-embroidered-winter-kurta-portrait"]].map(d => ({code:d[0], name:d[1], folder:d[2]}));
 
 function toJpegBase64(file, maxW = 1400){
   return new Promise((resolve, reject) => {
@@ -92,13 +90,11 @@ async function send(folder, kind, data){
 }
 
 /* ---- design list ---- */
-loadCatalogue(SHEET_URL).then(list => {
-  DESIGNS = list;
+(function(){
   const s = $("design"); s.replaceChildren();
-  list.forEach(l => { const o = document.createElement("option"); o.value = l.folder; o.textContent = `${l.name} (${l.code})`; s.appendChild(o); });
+  DESIGNS.forEach(l => { const o = document.createElement("option"); o.value = l.folder; o.textContent = `${l.name} (${l.code})`; s.appendChild(o); });
   const o = document.createElement("option"); o.value = "__other"; o.textContent = "Another design (type folder name)"; s.appendChild(o);
-  s.dispatchEvent(new Event("change"));
-}).catch(() => { $("design").innerHTML = '<option value="__other">Type folder name</option>'; $("design").dispatchEvent(new Event("change")); });
+})();
 $("design").addEventListener("change", () => { $("otherWrap").hidden = $("design").value !== "__other"; });
 
 /* ---- many photos at once ---- */
